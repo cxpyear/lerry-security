@@ -1,4 +1,4 @@
-package com.lerry.lerrysecurity.core;
+package com.lerry.lerrysecurity.common.service;
 
 
 import com.lerry.lerrysecurity.common.annotations.ServiceLog;
@@ -45,7 +45,7 @@ public abstract class AbstractService<T> implements Service<T> {
 
     @Override
     @ServiceLog(description = "通过主鍵刪除")
-    public int deleteById(Integer id) {
+    public int deleteById(Long id) {
         return mapper.deleteByPrimaryKey(id);
     }
 
@@ -63,7 +63,7 @@ public abstract class AbstractService<T> implements Service<T> {
 
     @Override
     @ServiceLog(description = "通过ID查找")
-    public T findById(Integer id) {
+    public T findById(Long id) {
         return mapper.selectByPrimaryKey(id);
     }
 

@@ -1,4 +1,4 @@
-package com.lerry.lerrysecurity.service;
+package com.lerry.lerrysecurity.auth.service;
 
 import com.lerry.lerrysecurity.BaseTestService;
 

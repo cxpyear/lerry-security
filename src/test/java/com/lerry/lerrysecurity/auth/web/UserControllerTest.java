@@ -1,4 +1,4 @@
-package com.lerry.lerrysecurity.web;
+package com.lerry.lerrysecurity.auth.web;
 
 import com.lerry.lerrysecurity.BaseTestController;
 
