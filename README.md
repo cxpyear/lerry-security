@@ -1,6 +1,7 @@
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![GitHub Release](https://img.shields.io/github/release/lerry903/lerry-security.svg)](https://github.com/lerry903/lerry-security/releases)
 [![SpringBoot](https://img.shields.io/badge/SpringBoot-2.0.3.RELEASE-brightgreen.svg)](https://docs.spring.io/spring-boot/docs/2.0.3.RELEASE/reference/htmlsingle/)
+[![SpringSecurity](https://img.shields.io/badge/SpringSecurity-5.0.6.RELEASE-brightgreen.svg)](https://docs.spring.io/spring-security/site/docs/5.0.6.RELEASE/reference/htmlsingle/)
 
 
 
