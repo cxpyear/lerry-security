@@ -7,10 +7,10 @@ CREATE TABLE `t_sys_group` (
   `name` varchar(50) COMMENT '名称',
   `order_num` int COMMENT '排序',
   `remark` varchar(255) COMMENT '备注',
-  `status` tinyint DEFAULT 0 COMMENT '状态  -1：已删除  0：正常',
+  `status` int(4) DEFAULT 0 COMMENT '状态  -1：已删除  0：正常',
   PRIMARY KEY (`id`),
   UNIQUE INDEX (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='权限组';
 
 -- 角色
 CREATE TABLE `t_sys_role` (
@@ -18,8 +18,8 @@ CREATE TABLE `t_sys_role` (
   `code` varchar(100) COMMENT '角色编号',
   `name` varchar(100) COMMENT '角色名称',
   `remark` varchar(255) COMMENT '备注',
-  `group_id` bigint(20) COMMENT '组ID',
-  `status` tinyint DEFAULT 0 COMMENT '状态  -1：已删除  0：正常',
+  `group_id` bigint(20) COMMENT '权限组ID',
+  `status` int(4) DEFAULT 0 COMMENT '状态  -1：已删除  0：正常',
   `create_time` timestamp default CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`),
   UNIQUE INDEX (`code`)
@@ -33,7 +33,7 @@ CREATE TABLE `t_sys_user` (
   `realname` varchar(100) COMMENT '真实姓名',
   `email` varchar(100) COMMENT '邮箱',
   `mobile` varchar(100) COMMENT '手机号',
-  `status` tinyint COMMENT '状态  0：禁用   1：正常',
+  `status` int(4) DEFAULT 1 COMMENT '状态 -1：注销 0：禁用   1：正常',
   `create_user` varchar(100) COMMENT '创建人',
   `create_time` timestamp default CURRENT_TIMESTAMP COMMENT '创建时间',
   `modify_user` varchar(100) COMMENT '修改人',
@@ -53,7 +53,7 @@ CREATE TABLE `t_sys_menu` (
   `parent_code` varchar(50) COMMENT '父级编号，一级菜单为null',
   `url` varchar(200) COMMENT '菜单URL',
   `icon` varchar(50) COMMENT '图标',
-  `status` tinyint DEFAULT 1 COMMENT '状态  -1：已删除  0隐藏，1正常',
+  `status` int(4) DEFAULT 1 COMMENT '状态  -1：已删除  0隐藏，1正常',
   `secured` varchar(500) COMMENT '授权',
   `remark` varchar(255) COMMENT '备注',
   `order_num` int COMMENT '排序',
@@ -83,7 +83,7 @@ INSERT INTO `t_sys_group` (`code`, `name`, `order_num`, `remark`) VALUES ('C000'
 INSERT INTO `t_sys_group` (`code`, `name`, `order_num`, `remark`) VALUES ('C001', 'XX集团', 2, '集团总公司');
 INSERT INTO `t_sys_group` (`code`, `name`, `order_num`, `remark`) VALUES ('C001001', '上海分公司', 3, '上海分公司');
 
-INSERT INTO `t_sys_role` (`code`, `name`, `remark`, `group_id`) VALUES ('admin', '管理员角色', '管理员角色', 1);
+INSERT INTO `t_sys_role` (`code`, `name`, `remark`, `group_id`) VALUES ('ROLE_ADMIN', '系统管理员', '系统管理员', 1);
 
 INSERT INTO t_sys_menu(`code`, `name`, `type`, `parent_code`, `url`, `icon`, `remark`, `order_num`) VALUES('system_manage','系统管理',0,null,null,null,'系统管理',0);
 
@@ -98,3 +98,7 @@ INSERT INTO t_sys_menu(`code`, `name`, `type`, `parent_code`, `url`, `icon`, `re
 INSERT INTO t_sys_menu(`code`, `name`, `type`, `parent_code`, `url`, `icon`, `remark`, `order_num`) VALUES('user_manage_update','修改',2,'user_manage','',null,'修改按钮',23);
 
 INSERT INTO t_sys_role_menu(role_id,menu_id) SELECT 1,id FROM t_sys_menu order by order_num;
+
+INSERT INTO t_sys_user(username,`password`,realname,`status`) VALUES('admin','{bcrypt}$2a$10$QjQVRCpL/LmBayl0VbdFSeDMozXdjxY5kVngHZtFFTyL0ssU/2oxG','系统管理员',1);
+
+INSERT INTO t_sys_user_role(user_id,role_id) VALUES(1,1);
