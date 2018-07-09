@@ -73,7 +73,6 @@ public class AppUserDetailServiceImpl implements AppUserDetailService {
             }
         }
         user.setLastLoginTime(new Date());
-        logger.info(String.format("%s Role is %s",username,authorities));
         userDetails.setUser(user);
         userDetails.setAuthorities(authorities);
         userService.update(user);

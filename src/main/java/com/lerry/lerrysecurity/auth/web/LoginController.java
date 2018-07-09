@@ -3,7 +3,7 @@ package com.lerry.lerrysecurity.auth.web;
 import com.lerry.lerrysecurity.auth.model.LoginForm;
 import com.lerry.lerrysecurity.auth.model.SysUser;
 import com.lerry.lerrysecurity.auth.service.SysUserService;
-import com.lerry.lerrysecurity.common.ProjectConstant;
+import com.lerry.lerrysecurity.common.result.ResponseResult;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -22,6 +22,7 @@ import javax.validation.Valid;
  * Date: 2018/7/8
  * Time: 下午2:09
  */
+@ResponseResult
 @RestController
 @RequestMapping("/")
 public class LoginController {
@@ -34,7 +35,7 @@ public class LoginController {
      * @param form
      * @return
      */
-    @PostMapping("login")
+    @PostMapping
     public SysUser login(@Valid @RequestBody LoginForm form){
         return sysUserService.login(form);
     }
@@ -46,17 +47,12 @@ public class LoginController {
      * @return
      */
     @GetMapping
-    public String logOut(HttpServletRequest request, HttpServletResponse response) {
-        String result = ProjectConstant.SUCCESS;
-        try {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            if (auth != null) {
-                new SecurityContextLogoutHandler().logout(request, response, auth);
-            }
-        }catch (Exception e) {
-            result = ProjectConstant.FAILURE;
+    public void logOut(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return result;
+
     }
 
 }
