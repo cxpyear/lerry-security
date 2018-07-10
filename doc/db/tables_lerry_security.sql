@@ -51,7 +51,8 @@ CREATE TABLE `t_sys_menu` (
   `name` varchar(50) COMMENT '菜单名称',
   `type` int COMMENT '类型   0：目录   1：菜单   2：按钮',
   `parent_code` varchar(50) COMMENT '父级编号，一级菜单为null',
-  `url` varchar(200) COMMENT '菜单URL',
+  `url` varchar(200) COMMENT '组件URL',
+  `method` varchar(50) COMMENT '按钮方法访问方式 GET POST PUT DELETE',
   `icon` varchar(50) COMMENT '图标',
   `status` int(4) DEFAULT 1 COMMENT '状态  -1：已删除  0隐藏，1正常',
   `secured` varchar(500) COMMENT '授权',
@@ -93,9 +94,9 @@ INSERT INTO t_sys_menu(`code`, `name`, `type`, `parent_code`, `url`, `icon`, `re
 INSERT INTO t_sys_menu(`code`, `name`, `type`, `parent_code`, `url`, `icon`, `remark`, `order_num`) VALUES('role_manage_update','修改',2,'role_manage','',null,'修改按钮',13);
 
 INSERT INTO t_sys_menu(`code`, `name`, `type`, `parent_code`, `url`, `icon`, `remark`, `order_num`) VALUES('user_manage','用户管理',1,'system_manage','',null,'用户管理',20);
-INSERT INTO t_sys_menu(`code`, `name`, `type`, `parent_code`, `url`, `icon`, `remark`, `order_num`) VALUES('user_manage_select','查询',2,'user_manage','',null,'查询按钮',21);
-INSERT INTO t_sys_menu(`code`, `name`, `type`, `parent_code`, `url`, `icon`, `remark`, `order_num`) VALUES('user_manage_add','新增',2,'user_manage','',null,'新增按钮',22);
-INSERT INTO t_sys_menu(`code`, `name`, `type`, `parent_code`, `url`, `icon`, `remark`, `order_num`) VALUES('user_manage_update','修改',2,'user_manage','',null,'修改按钮',23);
+INSERT INTO t_sys_menu(`code`, `name`, `type`, `parent_code`, `url`, `method`, `icon`, `remark`, `order_num`) VALUES('user_manage_select','查询',2,'user_manage','/sys/user/**','GET',null,'查询按钮',21);
+INSERT INTO t_sys_menu(`code`, `name`, `type`, `parent_code`, `url`, `method`, `icon`, `remark`, `order_num`) VALUES('user_manage_add','新增',2,'user_manage','/sys/user','POST',null,'新增按钮',22);
+INSERT INTO t_sys_menu(`code`, `name`, `type`, `parent_code`, `url`, `method`, `icon`, `remark`, `order_num`) VALUES('user_manage_update','修改',2,'user_manage','/sys/user','PUT',null,'修改按钮',23);
 
 INSERT INTO t_sys_role_menu(role_id,menu_id) SELECT 1,id FROM t_sys_menu order by order_num;
 

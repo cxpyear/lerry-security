@@ -36,6 +36,11 @@ public class SysMenu implements Serializable {
     private String url;
 
     /**
+     * 按钮方法访问方式 GET POST PUT DELETE
+     */
+    private String method;
+
+    /**
      * 图标
      */
     private String icon;
@@ -165,6 +170,24 @@ public class SysMenu implements Serializable {
      */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    /**
+     * 获取按钮方法访问方式
+     *
+     * @return method - 按钮方法访问方式
+     */
+    public String getMethod() {
+        return method;
+    }
+
+    /**
+     * 设置按钮方法访问方式
+     *
+     * @param method 按钮方法访问方式
+     */
+    public void setMethod(String method) {
+        this.method = method;
     }
 
     /**

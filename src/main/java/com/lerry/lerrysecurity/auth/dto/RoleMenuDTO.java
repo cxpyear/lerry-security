@@ -64,6 +64,11 @@ public class RoleMenuDTO implements Serializable {
     private String url;
 
     /**
+     * 获取按钮方法访问方式
+     */
+    private String method;
+
+    /**
      * 组件状态 -1：已删除  0隐藏，1正常
      */
     private String menuStatus;

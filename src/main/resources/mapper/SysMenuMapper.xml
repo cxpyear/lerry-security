@@ -11,6 +11,7 @@
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="parent_code" jdbcType="VARCHAR" property="parentCode" />
     <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="secured" jdbcType="VARCHAR" property="secured" />

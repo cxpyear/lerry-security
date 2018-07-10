@@ -20,6 +20,7 @@
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="parent_code" jdbcType="VARCHAR" property="parentCode" />
     <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
     <result column="menu_status" jdbcType="INTEGER" property="menuStatus" />
   </resultMap>
 
@@ -27,8 +28,8 @@
   <select id="getRoleMenuList" resultMap="RoleMenuResultMap"
           parameterType="com.lerry.lerrysecurity.auth.model.SysMenu">
     SELECT
-    r.id role_id,r.code role_code,r.name role_name,m.id  menu_id,m.code menu_code,
-    m.name menu_name,m.type type,m.parent_code parent_code,m.url url,m.status menu_status
+    r.id role_id,r.code role_code,r.name role_name,m.id  menu_id,m.code menu_code,m.name menu_name,
+    m.type type,m.parent_code parent_code,m.url url,m.method method,m.status menu_status
     FROM t_sys_menu m,t_sys_role_menu rm,t_sys_role r
     <where>
       m.id=rm.menu_id and rm.role_id=r.id and m.type=2 and r.status=0 and m.status=1
