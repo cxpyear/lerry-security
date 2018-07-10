@@ -1,11 +1,17 @@
 package com.lerry.lerrysecurity.configurer;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+
+import javax.annotation.Resource;
+
+import static com.lerry.lerrysecurity.common.ProjectConstant.LOGIN_URL;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,26 +27,47 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * 登录成功后的处理类
+     */
+    @Resource
+    private LoginSuccessHandler loginSuccessHandler;
+
+    /**
+     * 获取登录路径需要的权限
+     */
+    @Autowired
+    private UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource;
+
+    /**
+     * 预调用处理
+     */
+    @Autowired
+    UrlAccessDecisionManager urlAccessDecisionManager;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+                    @Override
+                    public FilterSecurityInterceptor postProcess(FilterSecurityInterceptor o) {
+                        o.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource);
+                        o.setAccessDecisionManager(urlAccessDecisionManager);
+                        return o;
+                    }
+                })
                 //登陆接口不需要登陆也可访问
-                .antMatchers("/login").permitAll()
+                .antMatchers(LOGIN_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 // 自定义的登录接口
-                .loginProcessingUrl("/login")
-                //登录成功后可使用loginSuccessHandler()存储用户信息，可选。
-                .successHandler(loginSuccessHandler())
+                .loginProcessingUrl(LOGIN_URL)
+                //登录成功后可使用loginSuccessHandler存储用户信息，可选。
+                .successHandler(loginSuccessHandler)
                 .and()
                 .csrf()
                 .disable();
-    }
-
-    @Bean
-    public LoginSuccessHandler loginSuccessHandler(){
-        return new LoginSuccessHandler();
     }
 
 }

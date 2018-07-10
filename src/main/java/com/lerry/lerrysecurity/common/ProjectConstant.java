@@ -28,8 +28,6 @@ public final class ProjectConstant {
      */
     public static final String MAPPER_BASE_PACKAGE = BASE_PACKAGE+".**.dao";
 
-    public static final String SUCCESS = "success";
-
-    public static final String FAILURE = "failure";
+    public static final String LOGIN_URL = "/login";
 
 }

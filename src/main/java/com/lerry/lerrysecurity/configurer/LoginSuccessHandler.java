@@ -2,10 +2,9 @@ package com.lerry.lerrysecurity.configurer;
 
 import com.lerry.lerrysecurity.auth.model.AppUserDetails;
 import com.lerry.lerrysecurity.common.util.IpUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +19,9 @@ import java.io.IOException;
  * Date: 2018/7/9
  * Time: 下午8:30
  */
-
+@Component
 public class LoginSuccessHandler extends
         SavedRequestAwareAuthenticationSuccessHandler {
-
-    private final Logger logger = LoggerFactory.getLogger(LoginSuccessHandler.class);
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,

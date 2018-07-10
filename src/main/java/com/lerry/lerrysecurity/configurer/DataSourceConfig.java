@@ -1,8 +1,6 @@
 package com.lerry.lerrysecurity.configurer;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -21,8 +19,6 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 public class DataSourceConfig {
-
-    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Bean(name = "dataSource")
     public DataSource dataSource(Environment environment) {

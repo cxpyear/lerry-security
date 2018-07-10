@@ -83,8 +83,6 @@ public class LogAspectUtil {
      */
     private static List<String> getSensitiveFieldList() {
         List<String> sensitiveFieldList = Lists.newArrayList();
-        sensitiveFieldList.add("pwd");
-        sensitiveFieldList.add("password");
         return sensitiveFieldList;
     }
 }

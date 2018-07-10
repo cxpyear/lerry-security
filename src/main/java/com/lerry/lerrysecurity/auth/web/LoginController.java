@@ -35,7 +35,7 @@ public class LoginController {
      * @param form
      * @return
      */
-    @PostMapping
+    @PostMapping("login")
     public SysUser login(@Valid @RequestBody LoginForm form){
         return sysUserService.login(form);
     }
@@ -46,7 +46,7 @@ public class LoginController {
      * @param response
      * @return
      */
-    @GetMapping
+    @GetMapping("logOut")
     public void logOut(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {

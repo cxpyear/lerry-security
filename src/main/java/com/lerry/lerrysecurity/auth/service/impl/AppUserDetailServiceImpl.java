@@ -9,8 +9,6 @@ import com.lerry.lerrysecurity.auth.service.SysUserRoleService;
 import com.lerry.lerrysecurity.auth.service.SysUserService;
 import com.lerry.lerrysecurity.common.ConstantEnum;
 import com.lerry.lerrysecurity.common.exception.DataNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,8 +31,6 @@ import java.util.*;
 @Transactional
 public class AppUserDetailServiceImpl implements AppUserDetailService {
 
-    private final Logger logger = LoggerFactory.getLogger(AppUserDetailServiceImpl.class);
-
     @Resource
     private SysUserService userService;
 
@@ -42,7 +38,7 @@ public class AppUserDetailServiceImpl implements AppUserDetailService {
     private SysUserRoleService userRoleService;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws DataNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         Assert.notBlank(username, "用户名不能为空");
         Condition findByUserCondition = new Condition(SysUser.class);
         findByUserCondition.createCriteria()

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
  * Time: 14:41
  */
 public enum ExceptionEnum {
+
     /**
      * 无效参数
      */

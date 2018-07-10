@@ -1,13 +1,12 @@
 package com.lerry.lerrysecurity.auth.web;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lerry.lerrysecurity.auth.model.SysUser;
 import com.lerry.lerrysecurity.auth.service.SysUserService;
 import com.lerry.lerrysecurity.common.result.ResponseResult;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.lerry.lerrysecurity.common.util.EncryptProvider;
 import com.lerry.lerrysecurity.common.util.StringUtil;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -55,7 +54,6 @@ public class SysUserController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public PageInfo list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         List<SysUser> list = sysUserService.findAll();

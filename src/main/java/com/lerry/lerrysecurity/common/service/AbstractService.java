@@ -87,7 +87,7 @@ public abstract class AbstractService<T> implements Service<T> {
 
     @Override
     @ServiceLog(description = "根据自定义条件查找")
-    public T findBy(String fieldName, Object value) throws BusinessException {
+    public T findBy(String fieldName, Object value) {
         try {
             T model = modelClass.newInstance();
             Field field = modelClass.getDeclaredField(fieldName);
