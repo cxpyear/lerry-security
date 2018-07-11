@@ -2,7 +2,6 @@ package com.lerry.lerrysecurity.auth.service.impl;
 
 import com.lerry.lerrysecurity.auth.dao.SysUserMapper;
 import com.lerry.lerrysecurity.auth.model.AppUserDetails;
-import com.lerry.lerrysecurity.auth.model.LoginForm;
 import com.lerry.lerrysecurity.auth.model.SysUser;
 import com.lerry.lerrysecurity.auth.service.AppUserDetailService;
 import com.lerry.lerrysecurity.auth.service.SysUserService;
@@ -39,17 +38,18 @@ public class SysUserServiceImpl extends AbstractService<SysUser> implements SysU
     /**
      * 登陆用户
      *
-     * @param form
+     * @param userName
+     * @param passWord
      * @return
      */
     @Override
-    public SysUser login(LoginForm form) {
-        AppUserDetails userDetails = (AppUserDetails) userDetailService.loadUserByUsername(form.getUsername());
+    public SysUser login(String userName, String passWord) {
+        AppUserDetails userDetails = (AppUserDetails) userDetailService.loadUserByUsername(userName);
         if(userDetails == null){
             throw new DataNotFoundException();
         }
         //如果不是第三方登录则校验密码
-        if (!EncryptProvider.match(form.getPassword(),userDetails.getPassword())) {
+        if (!EncryptProvider.match(passWord,userDetails.getPassword())) {
             throw new BusinessException(ResultCode.USER_LOGIN_ERROR);
         }
         return userDetails.getUser();

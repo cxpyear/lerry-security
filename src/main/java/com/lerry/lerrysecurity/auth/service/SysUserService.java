@@ -1,5 +1,5 @@
 package com.lerry.lerrysecurity.auth.service;
-import com.lerry.lerrysecurity.auth.model.LoginForm;
+
 import com.lerry.lerrysecurity.auth.model.SysUser;
 import com.lerry.lerrysecurity.common.service.Service;
 
@@ -15,9 +15,10 @@ public interface SysUserService extends Service<SysUser> {
 
     /**
      * 登陆用户
-     * @param form
+     * @param userName
+     * @param passWord
      * @return
      */
-    SysUser login(LoginForm form);
+    SysUser login(String userName, String passWord);
 
 }

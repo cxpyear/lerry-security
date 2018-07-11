@@ -1,6 +1,5 @@
 package com.lerry.lerrysecurity.auth.web;
 
-import com.lerry.lerrysecurity.auth.model.LoginForm;
 import com.lerry.lerrysecurity.auth.model.SysUser;
 import com.lerry.lerrysecurity.auth.service.SysUserService;
 import com.lerry.lerrysecurity.common.result.ResponseResult;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,12 +30,14 @@ public class LoginController {
 
     /**
      * 登入
-     * @param form
+     * @param userName 用户名
+     * @param passWord 密码
      * @return
      */
     @PostMapping("login")
-    public SysUser login(@Valid @RequestBody LoginForm form){
-        return sysUserService.login(form);
+    public SysUser login(@RequestParam(name = "userName") String userName,
+                         @RequestParam(name = "passWord") String passWord){
+        return sysUserService.login(userName, passWord);
     }
 
     /**
