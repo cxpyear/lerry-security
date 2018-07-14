@@ -2,7 +2,6 @@ package com.lerry.lerrysecurity.common.result;
 
 import cn.hutool.core.util.StrUtil;
 import com.lerry.lerrysecurity.common.exception.BusinessException;
-import com.lerry.lerrysecurity.common.exception.ExceptionEnum;
 import com.lerry.lerrysecurity.common.util.RequestContextHolderUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -90,11 +89,6 @@ public class DefaultErrorResult implements Result {
     }
 
     public static DefaultErrorResult failure(BusinessException e) {
-        ExceptionEnum ee = ExceptionEnum.getByEClass(e.getClass());
-        if (ee != null) {
-            return DefaultErrorResult.failure(ee.getResultCode(), e, ee.getHttpStatus(), e.getData());
-        }
-
         DefaultErrorResult defaultErrorResult = DefaultErrorResult.failure(e.getResultCode() == null ? ResultCode.SUCCESS : e.getResultCode(), e, HttpStatus.OK, e.getData());
         if (StrUtil.isNotEmpty(e.getMessage())) {
             defaultErrorResult.setMessage(e.getMessage());
