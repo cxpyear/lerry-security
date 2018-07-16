@@ -2,6 +2,7 @@ package com.lerry.lerrysecurity.configurer;
 
 import com.lerry.lerrysecurity.common.exception.PermissionForbiddenException;
 import com.lerry.lerrysecurity.common.exception.UserNotLoginException;
+import com.lerry.lerrysecurity.common.result.ResultCode;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
@@ -44,8 +45,8 @@ public class UrlAccessDecisionManager implements AccessDecisionManager {
             String needRole = ca.getAttribute();
             if ("ROLE_LOGIN".equals(needRole)) {
                 if (authentication instanceof AnonymousAuthenticationToken) {
-                    //用户为登录
-                    throw new UserNotLoginException();
+                    //用户未登录
+                    throw new UserNotLoginException(ResultCode.USER_NOT_LOGGED_IN);
                 } else{
                     return;
                 }
@@ -60,7 +61,7 @@ public class UrlAccessDecisionManager implements AccessDecisionManager {
             }
         }
         //无访问权限
-        throw new PermissionForbiddenException();
+        throw new PermissionForbiddenException(ResultCode.PERMISSION_NO_ACCESS);
     }
 
     @Override

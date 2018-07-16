@@ -13,10 +13,6 @@ import com.lerry.lerrysecurity.common.result.ResultCode;
 public class DataConflictException extends BusinessException {
     private static final long serialVersionUID = 3721036867889297081L;
 
-    public DataConflictException() {
-        super();
-    }
-
     public DataConflictException(Object data) {
         super();
         super.data = data;

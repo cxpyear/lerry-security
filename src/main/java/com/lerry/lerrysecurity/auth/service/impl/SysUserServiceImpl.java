@@ -46,7 +46,7 @@ public class SysUserServiceImpl extends AbstractService<SysUser> implements SysU
     public SysUser login(String userName, String passWord) {
         AppUserDetails userDetails = (AppUserDetails) userDetailService.loadUserByUsername(userName);
         if(userDetails == null){
-            throw new DataNotFoundException();
+            throw new DataNotFoundException(ResultCode.USER_NOT_EXIST);
         }
         //如果不是第三方登录则校验密码
         if (!EncryptProvider.match(passWord,userDetails.getPassword())) {

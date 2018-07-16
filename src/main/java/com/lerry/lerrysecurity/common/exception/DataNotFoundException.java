@@ -14,10 +14,6 @@ import com.lerry.lerrysecurity.common.result.ResultCode;
 public class DataNotFoundException extends BusinessException {
     private static final long serialVersionUID = 3721036867889297081L;
 
-    public DataNotFoundException() {
-        super();
-    }
-
     public DataNotFoundException(Object data) {
         super();
         super.data = data;

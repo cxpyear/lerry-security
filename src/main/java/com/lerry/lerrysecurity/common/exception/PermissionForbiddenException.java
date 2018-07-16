@@ -14,10 +14,6 @@ import com.lerry.lerrysecurity.common.result.ResultCode;
 public class PermissionForbiddenException extends BusinessException {
     private static final long serialVersionUID = 3721036867889297081L;
 
-    public PermissionForbiddenException() {
-        super();
-    }
-
     public PermissionForbiddenException(Object data) {
         super.data = data;
     }

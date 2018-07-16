@@ -13,10 +13,6 @@ import com.lerry.lerrysecurity.common.result.ResultCode;
 public class RemoteAccessException extends BusinessException {
     private static final long serialVersionUID = -832464574076215195L;
 
-    public RemoteAccessException() {
-        super();
-    }
-
     public RemoteAccessException(Object data) {
         super.data = data;
     }

@@ -1,5 +1,7 @@
 package com.lerry.lerrysecurity.common.exception;
 
+import com.lerry.lerrysecurity.common.result.ResultCode;
+
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -13,6 +15,19 @@ public class UserNotLoginException extends BusinessException {
 
     public UserNotLoginException() {
         super();
+    }
+
+    public UserNotLoginException(Object data) {
+        super();
+        super.data = data;
+    }
+
+    public UserNotLoginException(ResultCode resultCode) {
+        super(resultCode);
+    }
+
+    public UserNotLoginException(ResultCode resultCode, Object data) {
+        super(resultCode, data);
     }
 
     public UserNotLoginException(String msg) {
