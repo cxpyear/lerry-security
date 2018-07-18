@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 // 自定义的登录接口
-                .loginProcessingUrl(LOGIN_URL)
+                .loginProcessingUrl("/login")
                 //登录成功后可使用loginSuccessHandler存储用户信息，可选。
                 .successHandler(loginSuccessHandler)
                 .and()

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @ResponseResult
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user")
 public class LoginController {
 
     @Resource
@@ -34,7 +34,7 @@ public class LoginController {
      * @param passWord 密码
      * @return
      */
-    @PostMapping("login")
+    @PostMapping("/login")
     public SysUser login(@RequestParam(name = "userName") String userName,
                          @RequestParam(name = "passWord") String passWord){
         return sysUserService.login(userName, passWord);
@@ -46,7 +46,7 @@ public class LoginController {
      * @param response
      * @return
      */
-    @GetMapping("logOut")
+    @GetMapping("/logOut")
     public void logOut(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {

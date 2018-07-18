@@ -43,7 +43,7 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
         FilterInvocation fi = (FilterInvocation) object;
         String requestUrl = fi.getRequestUrl();
         String httpMethod = fi.getRequest().getMethod();
-        if (LOGIN_URL.equals(requestUrl)) {
+        if (LOGIN_URL.equals(requestUrl) || "/".equals(requestUrl)) {
             return Collections.emptyList();
         }
         SysMenu menu = new SysMenu();
