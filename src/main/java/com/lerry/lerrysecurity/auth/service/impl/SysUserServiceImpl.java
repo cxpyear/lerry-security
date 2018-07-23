@@ -1,5 +1,6 @@
 package com.lerry.lerrysecurity.auth.service.impl;
 
+import com.lerry.lerrysecurity.auth.component.OauthAuthenticationToken;
 import com.lerry.lerrysecurity.auth.dao.SysUserMapper;
 import com.lerry.lerrysecurity.auth.model.AppUserDetails;
 import com.lerry.lerrysecurity.auth.model.SysUser;
@@ -10,6 +11,7 @@ import com.lerry.lerrysecurity.common.exception.DataNotFoundException;
 import com.lerry.lerrysecurity.common.result.ResultCode;
 import com.lerry.lerrysecurity.common.service.AbstractService;
 import com.lerry.lerrysecurity.common.util.EncryptProvider;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +46,7 @@ public class SysUserServiceImpl extends AbstractService<SysUser> implements SysU
      */
     @Override
     public SysUser login(String userName, String passWord) {
+        SysUser sysUser = null;
         AppUserDetails userDetails = (AppUserDetails) userDetailService.loadUserByUsername(userName);
         if(userDetails == null){
             throw new DataNotFoundException(ResultCode.USER_NOT_EXIST);
@@ -52,6 +55,10 @@ public class SysUserServiceImpl extends AbstractService<SysUser> implements SysU
         if (!EncryptProvider.match(passWord,userDetails.getPassword())) {
             throw new BusinessException(ResultCode.USER_LOGIN_ERROR);
         }
-        return userDetails.getUser();
+        OauthAuthenticationToken.setAuthentication(userDetails,userName,passWord);
+        if(SecurityContextHolder.getContext().getAuthentication() != null){
+            sysUser = userDetails.getUser();
+        }
+        return sysUser;
     }
 }
