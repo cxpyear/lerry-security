@@ -35,8 +35,8 @@ public class LoginController {
      * @return
      */
     @PostMapping("/login")
-    public SysUser login(@RequestParam(name = "userName") String userName,
-                         @RequestParam(name = "passWord") String passWord){
+    public SysUser login(@RequestParam(name = "username") String userName,
+                         @RequestParam(name = "password") String passWord){
         return sysUserService.login(userName, passWord);
     }
 
